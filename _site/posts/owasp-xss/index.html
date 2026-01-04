@@ -38,12 +38,14 @@
 <link rel="canonical" href="http://localhost:4000/posts/owasp-xss/" />
 <meta property="og:url" content="http://localhost:4000/posts/owasp-xss/" />
 <meta property="og:site_name" content="Prakshit V Jain" />
+<meta property="og:image" content="http://localhost:4000/assets/xss.jpeg" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-05-26T05:30:00+05:30" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/xss.jpeg" />
 <meta property="twitter:title" content="XSS (Cross Site Scripting)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Prakshit Jain"},"dateModified":"2025-05-26T05:30:00+05:30","datePublished":"2025-05-26T05:30:00+05:30","description":"Note: This blog is completely based on OWASP guide for prevention of Cross Site Scripting (XSS), but it is put in my own words so it can be understood in a simpler way.","headline":"XSS (Cross Site Scripting)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/owasp-xss/"},"url":"http://localhost:4000/posts/owasp-xss/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Prakshit Jain"},"dateModified":"2025-05-26T05:30:00+05:30","datePublished":"2025-05-26T05:30:00+05:30","description":"Note: This blog is completely based on OWASP guide for prevention of Cross Site Scripting (XSS), but it is put in my own words so it can be understood in a simpler way.","headline":"XSS (Cross Site Scripting)","image":"http://localhost:4000/assets/xss.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/owasp-xss/"},"url":"http://localhost:4000/posts/owasp-xss/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -268,16 +270,6 @@
       <!-- the real tabs -->
       
         <li class="nav-item">
-          <a href="/categories/" class="nav-link">
-            <i class="fa-fw fas fa-stream"></i>
-            
-
-            <span>CATEGORIES</span>
-          </a>
-        </li>
-        <!-- .nav-item -->
-      
-        <li class="nav-item">
           <a href="/tags/" class="nav-link">
             <i class="fa-fw fas fa-tags"></i>
             
@@ -288,11 +280,11 @@
         <!-- .nav-item -->
       
         <li class="nav-item">
-          <a href="/archives/" class="nav-link">
-            <i class="fa-fw fas fa-archive"></i>
+          <a href="/timeline/" class="nav-link">
+            <i class="fa-fw fas fa-timeline"></i>
             
 
-            <span>ARCHIVES</span>
+            <span>TIMELINE</span>
           </a>
         </li>
         <!-- .nav-item -->
@@ -456,6 +448,105 @@
 
 
 
+
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+
+  
 
 
 <!-- Add header for code snippets -->
@@ -642,6 +733,15 @@
       <!-- lastmod date -->
       
 
+      
+        
+        
+        
+
+        
+
+        <div class="mt-3 mb-3">
+          <a href="/assets/xss.jpeg" class="popup img-link preview-img shimmer"><img src="/assets/xss.jpeg"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
       
 
       <div class="d-flex justify-content-between">
@@ -846,6 +946,21 @@ When using JavaScript, <code class="language-plaintext highlighter-rouge">.textC
 
     <!-- tags -->
     
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/owasp/"
+            class="post-tag no-text-decoration"
+          >owasp</a>
+        
+          <a
+            href="/tags/web/"
+            class="post-tag no-text-decoration"
+          >web</a>
+        
+      </div>
+    
 
     <div
       class="
@@ -947,6 +1062,13 @@ When using JavaScript, <code class="language-plaintext highlighter-rouge">.textC
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/nahamcon-ctf-2025/">NahamCon CTF 2025 Write-up</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/owasp-xss/">XSS (Cross Site Scripting)</a>
         </li>
       
@@ -978,7 +1100,96 @@ When using JavaScript, <code class="language-plaintext highlighter-rouge">.textC
 
 
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/owasp/">owasp</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/web/">web</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ctf/">ctf</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/write-up/">write-up</a>
+      
+    </div>
+  </section>
 
 
             </div>
@@ -1032,6 +1243,22 @@ When using JavaScript, <code class="language-plaintext highlighter-rouge">.textC
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
 
 
 
@@ -1041,6 +1268,42 @@ When using JavaScript, <code class="language-plaintext highlighter-rouge">.textC
 
 
 
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/sql-injection/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1741305600"
+  data-df="ll"
+  
+>
+  Mar  7, 2025
+</time>
+
+              <h4 class="pt-0 my-2">SQL Injection</h4>
+              <div class="text-muted">
+                <p>Note: This blog is completely based on OWASP guide for prevening SQL Injection Attacks, but it is put in my own words so it can be understood in a simpler way.   SQL injection is a process of injec...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
 
 
             
@@ -1062,9 +1325,13 @@ When using JavaScript, <code class="language-plaintext highlighter-rouge">.textC
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="Newer">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/nahamcon-ctf-2025/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>NahamCon CTF 2025 Write-up</p>
+    </a>
   
 </nav>
 
@@ -1130,7 +1397,96 @@ When using JavaScript, <code class="language-plaintext highlighter-rouge">.textC
 
 
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/owasp/">owasp</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/web/">web</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ctf/">ctf</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/write-up/">write-up</a>
+      
+    </div>
+  </section>
 
 
     </div>

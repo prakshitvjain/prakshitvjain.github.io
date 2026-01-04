@@ -1,0 +1,90 @@
+<blockquote>
+  <p><strong>Note</strong>: This blog is completely based on OWASP guide for prevention of Cross Site Scripting (XSS), but it is put in my own words so it can be understood in a simpler way.</p>
+</blockquote>
+
+<p>Cross Site Scripting is a common vulnerability involving a scenario where the attacker can inject malicious scripts as input to web applications to force the application to perform unintended tasks. There is no single technique or rule to prevent or reduce the impact of XSS.
+It is required to use the right combination of techniques and rules that can protect the application from XSS.</p>
+
+<p>Using modern web frameworks(React, Vue, Angular etc..), developers cover majority of the cases, but specific to the frameworks used, there are still minute gaps that can lead to serious damage. Output Encoding and Input Sanitization can act as critical defenses against XSS.</p>
+
+<h3 id="output-encoding">Output Encoding</h3>
+<p>Output Encoding can be helpful when the application wants to safely display the data as the user as typed. Similar to SQL injections, here the input obtained from the user should be interpreted as <code class="language-plaintext highlighter-rouge">text</code> and not the part of the <code class="language-plaintext highlighter-rouge">code</code>.</p>
+
+<h5 id="how-to-implement-it">How to implement it?</h5>
+<p>Most frameworks perform output encoding by default, however, if you are not using a framework, then every variable in the user interface should be passed through an Output Encoding function.</p>
+
+<p>Since different browsers parse HTML, CSS and JS differently, it is important to use appropriate encoding method, else it may introduce weaknesses as well as disturb the functionality of your application.</p>
+
+<p>Output encoding prevents these attacks by converting the special characters that can trigger XSS, such as <code class="language-plaintext highlighter-rouge">&lt;, &gt;, ", '</code> and <code class="language-plaintext highlighter-rouge">&amp;</code> into harmless HTML entities, such as <code class="language-plaintext highlighter-rouge">&amp;lt;</code>, <code class="language-plaintext highlighter-rouge">&amp;gt;</code>,<code class="language-plaintext highlighter-rouge"> &amp;quot;</code>,<code class="language-plaintext highlighter-rouge"> &amp;apos;</code>, and<code class="language-plaintext highlighter-rouge"> &amp;amp;</code>. This way, the browser will treat the data as plain text and not as code.</p>
+
+<p>Some popular Output Encoding Methods include:
+	OWASP’s ESAPI
+	PHP’s <code class="language-plaintext highlighter-rouge">htmlspecialchars()</code>
+	.NET’s <code class="language-plaintext highlighter-rouge">HtmlEncode()</code>
+	Python’s <code class="language-plaintext highlighter-rouge">html.escape</code></p>
+
+<h4 id="html-context">HTML Context</h4>
+
+<p>This refers to inserting variable between two basic HTML tags like a <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> or a <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code>.</p>
+
+<p>For eg.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div&gt;</span> $unsafVar <span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>An attacker could modify this <code class="language-plaintext highlighter-rouge">$unsafeVar</code> variable, which could lead to an attack.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div&gt;</span> <span class="nt">&lt;script&gt;</span> <span class="nf">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">XSS</span><span class="dl">'</span><span class="p">)</span> <span class="nt">&lt;/script&gt;</span> <span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>To add a variable to a HTML context safely, HTML entity encoding can be used.
+When using JavaScript, <code class="language-plaintext highlighter-rouge">.textContent</code> attribute can be a safe way to add a variable.</p>
+
+<h4 id="html-attribute-contexts">HTML Attribute Contexts</h4>
+
+<p>This refers to when a variable is placed in a HTML attribute value.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">attr=</span><span class="s">'$unsafeVar'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">attr=</span><span class="s">”*x”</span> <span class="na">onblur=</span><span class="s">”alert(1)*”</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>It is important to surround the variable names with <code class="language-plaintext highlighter-rouge">'</code> or <code class="language-plaintext highlighter-rouge">"</code>, as it makes it difficult for the attacker to change the context.</p>
+
+<p>When using JavaScript, <code class="language-plaintext highlighter-rouge">.setAttribute</code> methods can prove as a defensive technique against XSS. These are relatively safe when attribute names are hard-coded such as <code class="language-plaintext highlighter-rouge">id</code> or <code class="language-plaintext highlighter-rouge">class</code>.</p>
+
+<p>Attributes such as <code class="language-plaintext highlighter-rouge">onmouseover</code>, <code class="language-plaintext highlighter-rouge">onclick</code> etc are NOT safe to use with untrusted attribute values.</p>
+
+<h4 id="javascript-contexts">JavaScript Contexts</h4>
+
+<p>This refers to when variables are placed into inline JavaScript and then embedded into HTML document. The only secure way to place this way is to quote them. All other contexts are unsafe and not recommended.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span><span class="nf">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">$variable</span><span class="dl">'</span><span class="p">)</span><span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span><span class="nx">x</span><span class="o">=</span><span class="dl">'</span><span class="s1">$variable</span><span class="dl">'</span><span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">onclick=</span><span class="s">"'$variable'"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+<p>This way XSS can be prevented securely.</p>
+
+<p>For JSON, the <code class="language-plaintext highlighter-rouge">Content-Type</code> should be <code class="language-plaintext highlighter-rouge">application/json</code> and not <code class="language-plaintext highlighter-rouge">text/html</code> to prevent XSS.</p>
+
+<h4 id="css-contexts">CSS Contexts</h4>
+
+<p>When variables are placed into inline CSS, the variables should only be placed in CSS property value. Other CSS contexts are unsafe and variable data should not be placed in them.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;selector</span> <span class="p">{</span><span class="py">property</span> <span class="p">:</span> <span class="err">$</span><span class="n">variable</span><span class="p">;}</span> <span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;style&gt;selector</span> <span class="p">{</span><span class="py">property</span> <span class="p">:</span> <span class="s2">'$variable'</span><span class="p">;}</span> <span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"property:$variable"</span><span class="nt">&gt;</span>oh god<span class="nt">&lt;/span&gt;</span>
+</code></pre></div></div>
+
+<p>It is recommended to use <code class="language-plaintext highlighter-rouge">style.property = x</code>.</p>
+
+<h4 id="url-contexts">URL Contexts</h4>
+
+<p>URL Contexts refer to places where the developers add a parameter to a URL. This is an unsafe way to add parameter to a URL.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://example.com?u_id=$variable"</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p>To implement this safely, you should perform URL encoding followed by HTML attribute encoding:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>url = "http://example.com?u_id=" + urlencode(parameter)
+<span class="nt">&lt;a</span> <span class="na">href = </span><span class="s">"attributeEncode(url)"</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p>Thank You for reading. See you in the next blog!</p>

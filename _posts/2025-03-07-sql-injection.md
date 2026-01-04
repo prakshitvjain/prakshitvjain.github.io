@@ -2,6 +2,9 @@
 title: SQL Injection
 date: 2025-03-07 00:00:00 +0000
 author: Prakshit Jain
+tags: [owasp, web]
+image:
+  path: assets/sqli.png
 ---
 > **Note**: This blog is completely based on OWASP guide for prevening SQL Injection Attacks, but it is put in my own words so it can be understood in a simpler way.
 

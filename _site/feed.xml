@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Prakshit V Jain</title>
   <subtitle>cyber security, cybersecurity, prakshit, github, hacking, blog, writeup, ctf</subtitle>
-  <updated>2026-01-04T13:49:56+05:30</updated>
+  <updated>2026-01-04T23:48:56+05:30</updated>
   <author>
     <name>Prakshit V Jain</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,28 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>NahamCon CTF 2025 Write-up</title>
+    <link href="http://localhost:4000/posts/nahamcon-ctf-2025/" rel="alternate" type="text/html" title="NahamCon CTF 2025 Write-up" />
+    <published>2025-06-01T05:30:00+05:30</published>
+  
+    <updated>2025-06-01T05:30:00+05:30</updated>
+  
+    <id>http://localhost:4000/posts/nahamcon-ctf-2025/</id>
+    <content type="text/html" src="http://localhost:4000/posts/nahamcon-ctf-2025/" />
+    <author>
+      <name>Prakshit Jain</name>
+    </author>
+
+  
+    
+  
+
+  <summary>NahamCon CTF 2025 write-up Hello folks, this is my first write-up for my first CTF contest, The NahamCon CTF 2025 by Ben Sadeghipour aka Nahamsec. I have covered warmup and easy challenges that i was able to solve.  So let’s begin  Read The Rules — warmups  Challenge description: Please follow the rules for this CTF!  Just curl the rules page from terminal and grep flag  curl https://ctf.nahamc...</summary>
+
+  </entry>
 
   
   <entry>

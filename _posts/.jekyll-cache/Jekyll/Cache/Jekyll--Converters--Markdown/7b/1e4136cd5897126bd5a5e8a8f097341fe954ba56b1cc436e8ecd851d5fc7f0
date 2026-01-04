@@ -1,4 +1,4 @@
-<blockquote>
+I"Ìh<blockquote>
   <p><strong>Note</strong>: This blog is completely based on OWASP guide for prevening SQL Injection Attacks, but it is put in my own words so it can be understood in a simpler way.</p>
 </blockquote>
 
@@ -257,3 +257,4 @@ FLUSH PRIVILEGES;
 <p>As mentioned earlier implementing Input Validation as a primary defense only if nothing else works, but implementing it as a secondary defense in highly recommended to improve security. As explained in above section, it is used to detect unauthorized input before appending to the query. Proceed with caution, Input validation is highly discouraged as a primary defense, unless it is the only option.</p>
 
 <p>Thatâ€™s a wrap. Firstly, congratulations on making it so far. You have done a great job, wishing you Best of luck!</p>
+:ET
