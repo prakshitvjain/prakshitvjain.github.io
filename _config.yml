@@ -16,16 +16,16 @@ timezone:
 
 title: Prakshit V Jain # the main title
 
-tagline: Security Enthusiast # it will display as the subtitle
+tagline: Security Enthusiast | eJPTv2 # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A zealous security professional focused on securing systems.
+  cyber security, cybersecurity, prakshit, github, hacking, blog, writeup, ctf
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
 url: "https://prakshitvjain.github.io"
 
-github:
-  username: prakshitvjain # change to your GitHub username
+# github:
+#  username: prakshitvjain # change to your GitHub username
 
 # twitter:
 #  username: twitter_username # change to your Twitter username
@@ -38,7 +38,7 @@ social:
   links:
     # The first element serves as the copyright owner's link
     # https://twitter.com/username # change to your Twitter homepage
-    - https://github.com/prakshitvjain # change to your GitHub homepage
+ #   - https://github.com/prakshitvjain # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     - https://www.linkedin.com/in/prakshitjain
@@ -97,7 +97,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://avatars.githubusercontent.com/u/174292281?v=4
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -223,3 +223,5 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+post_copyright:
+  enable: false
