@@ -1,0 +1,25 @@
+
+
+{
+  "name": "Prakshit V Jain",
+  "short_name": "Prakshit V Jain",
+  "description": "cyber security, cybersecurity, prakshit, github, hacking, blog, writeup, ctf",
+  "icons": [
+    {
+      "src": "/assets/img/favicons/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/favicons/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/index.html",
+  "theme_color": "#2a1e6b",
+  "background_color": "#ffffff",
+  "display": "fullscreen"
+}
+

@@ -1,0 +1,67 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>Prakshit V Jain</title>
+  <subtitle>cyber security, cybersecurity, prakshit, github, hacking, blog, writeup, ctf</subtitle>
+  <updated>2026-01-04T13:49:56+05:30</updated>
+  <author>
+    <name>Prakshit V Jain</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2026 Prakshit V Jain </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>XSS (Cross Site Scripting)</title>
+    <link href="http://localhost:4000/posts/owasp-xss/" rel="alternate" type="text/html" title="XSS (Cross Site Scripting)" />
+    <published>2025-05-26T05:30:00+05:30</published>
+  
+    <updated>2025-05-26T05:30:00+05:30</updated>
+  
+    <id>http://localhost:4000/posts/owasp-xss/</id>
+    <content type="text/html" src="http://localhost:4000/posts/owasp-xss/" />
+    <author>
+      <name>Prakshit Jain</name>
+    </author>
+
+  
+    
+  
+
+  <summary>Note: This blog is completely based on OWASP guide for prevention of Cross Site Scripting (XSS), but it is put in my own words so it can be understood in a simpler way.   Cross Site Scripting is a common vulnerability involving a scenario where the attacker can inject malicious scripts as input to web applications to force the application to perform unintended tasks. There is no single techniqu...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>SQL Injection</title>
+    <link href="http://localhost:4000/posts/sql-injection/" rel="alternate" type="text/html" title="SQL Injection" />
+    <published>2025-03-07T05:30:00+05:30</published>
+  
+    <updated>2025-03-07T05:30:00+05:30</updated>
+  
+    <id>http://localhost:4000/posts/sql-injection/</id>
+    <content type="text/html" src="http://localhost:4000/posts/sql-injection/" />
+    <author>
+      <name>Prakshit Jain</name>
+    </author>
+
+  
+    
+  
+
+  <summary>Note: This blog is completely based on OWASP guide for prevening SQL Injection Attacks, but it is put in my own words so it can be understood in a simpler way.   SQL injection is a process of injecting or inserting a SQL query as a user input from client to application, that may lead to obtaining sensitive data from the database, modify database, shutdown the DBMS and also issue commands to OS....</summary>
+
+  </entry>
+
+</feed>
+
+

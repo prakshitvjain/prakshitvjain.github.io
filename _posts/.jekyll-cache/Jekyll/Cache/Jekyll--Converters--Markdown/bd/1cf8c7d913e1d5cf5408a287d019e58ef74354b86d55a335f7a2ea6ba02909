@@ -1,0 +1,256 @@
+I"�c<p>SQL injection is a process of injecting or inserting a SQL query as a user input from client to application, that may lead to obtaining sensitive data from the database, modify database, shutdown the DBMS and also issue commands to OS.</p>
+
+<h5 id="threat-modeling">Threat Modeling</h5>
+
+<ul>
+  <li>It allows attackers to spoof their identity, tamper with data and become administrator of database server.</li>
+  <li>SQL injection is common in PHP and ASP applications rather than j2EE and ASP.NET applications due to their respective programmatic interfaces.</li>
+  <li>It is a high impact severity.</li>
+</ul>
+
+<h5 id="sql-injection-attack-occurs-when">SQL injection attack occurs when:</h5>
+
+<ol>
+  <li>An unintended data enters a program from an untrusted source.</li>
+  <li>The data is used to dynamically construct a SQL query.</li>
+</ol>
+
+<h1 id="anatomy-of-a-typical-sql-injection-vulnerability">Anatomy of A Typical SQL Injection Vulnerability</h1>
+
+<h3 id="input-validation"><strong>Input Validation:</strong></h3>
+
+<p>A common SQL injection vulnerability in Java is un-validated input from the user that is taken and appended to the query, and the input is executed as a part of the query. An attacker can manipulate the query in accordance to his will.</p>
+
+<p>Take a look at the below example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT balance FROM account WHERE user_name = '"</span> 
+<span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"customerName"</span><span class="o">)</span><span class="s">"'"</span><span class="o">:</span>
+</code></pre></div></div>
+
+<p>If an attacker passes the username as</p>
+<pre><code class="language-MySQL">admin OR 1=1
+</code></pre>
+<p>Or</p>
+<pre><code class="language-MySQL">admin; DROP TABLE account
+</code></pre>
+
+<p>The query will look something like this</p>
+<pre><code class="language-MySQL">SELECT balance FROM account WHERE user_name = 'admin' OR 1=1;
+
+-- OR
+
+SELECT balance FROM account WHERE user_name = 'admin'; DROP TABLE account;
+</code></pre>
+<p>Such attacks are very dangerous and compromise the security of Organization</p>
+
+<p>So, what are the solutions to prevent these?</p>
+<h2 id="primary-defenses">Primary Defenses</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1: Use of Prepared Statements (with Parameterized Queries)
+2: Use of Properly Constructed Stored Procedures
+3: Allow-list Input Validation
+4: STRONGLY DISCOURAGED: Escaping All User Supplied Input
+</code></pre></div></div>
+
+<h3 id="1-parameterized-queries-prepared-statements"><strong>1. Parameterized queries (Prepared Statements)</strong></h3>
+
+<p>The correct way to prevent SQL injection is to never concatenate user input directly into the query instead use parameterized queries (Prepared Statements). This ensures that the user input is treated as data and not the part of SQL code.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT balance FROM account WHERE user_name = ?"</span><span class="o">;</span>
+<span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">query</span><span class="o">);</span>
+<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"customerName"</span><span class="o">));</span>
+<span class="nc">ResultSet</span> <span class="n">result</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>This way the attacker will never be able to inject malicious SQL queries as input. Almost all the languages support parameterized queries. Even SQL abstraction layers like HQL (Hibernate Query Language) faces similar type of injection problems called HQL injection.
+Using prepared statements also makes your application relatively database independent.</p>
+
+<h3 id="2-stored-procedures"><strong>2. Stored Procedures</strong></h3>
+
+<p>Even though Stored procedures are not always safe from SQL injections, developers can use certain standard stored procedures constructs that are generally safe if implemented accordingly.</p>
+<h5 id="are-they-safe">Are they Safe?</h5>
+
+<p>To ensure security, the developers are required to create SQL statements with parameters that are automatically parameterized. The basic difference between prepared statements and stored procedures is that the SQL code for a stored procedure is stored in the database itself, and is called by the application. Hence making parameterized queries and stored procedures equally effective in safeguarding the application from SQL injection.</p>
+
+<h5 id="when-use-of-stored-procedures-are-a-risk">When use of Stored Procedures are a risk?</h5>
+
+<p>Stored Procedures can be a risk when a system is attacked. Consider an example where an application uses a MS SQL Server, with default roles like <code class="language-plaintext highlighter-rouge">db_datareader</code> , <code class="language-plaintext highlighter-rouge">db_datawriter</code> and <code class="language-plaintext highlighter-rouge">db_owner</code>. Before stored procedures came into use, DBAs (Database Administrators) would assign roles to users, depending on the requirements.</p>
+
+<p>The default roles like  <code class="language-plaintext highlighter-rouge">db_datareader</code> , <code class="language-plaintext highlighter-rouge">db_datawriter</code> do not have rights to execute stored procedures, and in organizations where user management is centralized with just these 3 default roles, assigning <code class="language-plaintext highlighter-rouge">db_owner</code> to users would to a potential risk. If an attacker gains access to any of the users or a server, the attacker will have full rights to the database, where previously they had only read access.</p>
+
+<h5 id="a-secure-stored-procedure-example-in-java">A Secure Stored Procedure Example in Java</h5>
+<pre><code class="language-Java">//This input should be validated in terms of length and allowed characters using regular expressions
+String custname = request.getParameter("customerName");
+try {
+	callableStatement cs = connection.prepareCall("{call sp_getBalance(?)}");
+	cs.setString(1,custname);
+	ResultSet rs = cs.executeQuery();
+	//manipulating recieved data
+}
+catch (SQLexception){
+	//logging and error messsage display
+}
+</code></pre>
+
+<p>This example uses Java’s stored procedure implementation using <code class="language-plaintext highlighter-rouge">callableStatement</code> to execute database queries. Where <code class="language-plaintext highlighter-rouge">sp_getBalance</code> is a stored procedure predefined in the database. The <code class="language-plaintext highlighter-rouge">call</code> in the <code class="language-plaintext highlighter-rouge">{call sp_getBalance(?)</code> is used to call the stored procedure and the <code class="language-plaintext highlighter-rouge">?</code> represents the parameter placeholder.</p>
+
+<h3 id="3-allow-list-input-validation"><strong>3. Allow-List Input Validation</strong></h3>
+
+<p>When faced with SQL queries that can’t use bind variables (parameterized queries) such as names of tables or columns and the sort order indicators (ASC or DESC) as well, input validation is the best defense. When names of tables and columns are needed, they should come from the code and not the user parameters.</p>
+
+<h5 id="a-secure-sample-example-for-allow-list-input-validation">A Secure Sample Example For Allow-List Input Validation</h5>
+
+<p>If user parameter values are used to target different tables and columns, then it is merely a symptom of a poor design and a full-redesigning should be considered. Otherwise the developers should map the parameter values to legal/valid table and column names, preventing the user input from ending up in the query.</p>
+
+<p>Take a look at the Dynamic SQL generation</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">tableName</span><span class="o">;</span>
+<span class="k">switch</span><span class="o">(</span><span class="n">parameter</span><span class="o">){</span>
+	<span class="k">case</span> <span class="s">"valueA"</span><span class="o">:</span>
+		<span class="n">tableName</span> <span class="o">=</span> <span class="s">"ordersTable"</span><span class="o">;</span>
+		<span class="k">break</span><span class="o">;</span>
+	<span class="k">case</span> <span class="s">"valueB"</span><span class="o">:</span>
+		<span class="n">tableName</span> <span class="o">=</span> <span class="s">"shippedTable"</span><span class="o">;</span>
+		<span class="k">break</span><span class="o">;</span>
+	<span class="k">default</span><span class="o">:</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">InpuExceptionError</span><span class="o">(</span><span class="s">"Invalid input for table name"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In the above example the <code class="language-plaintext highlighter-rouge">tableName</code> is declared and using <code class="language-plaintext highlighter-rouge">switch</code>, the user input i.e <code class="language-plaintext highlighter-rouge">parameter</code> is validated and a value is assigned to <code class="language-plaintext highlighter-rouge">tablename</code> depending upon different cases. If input is <code class="language-plaintext highlighter-rouge">valueA</code> then the value of <code class="language-plaintext highlighter-rouge">tableName</code> will be <code class="language-plaintext highlighter-rouge">"ordersTable"</code>. The <code class="language-plaintext highlighter-rouge">default</code> block handles the errors and exceptions effectively. Here the query is dynamically generated based on the user input but it is secure as it is validated prior to acceptance.</p>
+
+<h5 id="when-to-use-this-allow-list-input-validation-">When to use this Allow-List Input Validation ?</h5>
+
+<p>When we say stored procedures are safe, It is assumed that the stored procedures do not include dynamic SQL code generation. It is usually avoided by the developers. But in some scenarios, if there is a need for dynamic SQL code generation, the Allow-list input method or proper escaping must be used to secure the program.</p>
+
+<h5 id="a-safer-way-to-implement-dynamic-query-generation">A safer way to implement Dynamic Query Generation</h5>
+
+<p>For something simple like sort order, it would be a better way to first convert the user supplied data to boolean and then use the boolean value to determine the legal value, that is appended to the query.</p>
+
+<p>For example</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">String</span> <span class="nf">someMethod</span> <span class="o">(</span><span class="kt">boolean</span> <span class="n">parameter</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">String</span> <span class="n">query</span> <span class="o">=</span> <span class="s">" SELECT * FROM employees ORDER BY salary "</span> <span class="o">+</span> <span class="o">(</span><span class="n">parameter</span> <span class="o">?</span> <span class="s">"ASC"</span> <span class="o">:</span> <span class="s">"DESC"</span><span class="o">);</span>
+	<span class="k">return</span> <span class="n">query</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Like the above example, if possible it is always safer to convert any user input to a non-string format like integer, boolean, time, date, etc. before it is appended to query or used to select a value to append to a query.</p>
+
+<p>Input validation is recommended as a secondary defense in all cases even when using prepared statements or stored procedures to ensure maximum security.</p>
+
+<h3 id="4-escaping-all-user-supplied-input"><strong>4. Escaping All User-Supplied Input</strong></h3>
+
+<p>In this approach, the developer will have to escape all the input supplied by the user before appending it to a query. Escaping input refers to ensuring that any special characters in user-supplied input are converted or escaped into a safe form before they are included in an SQL query. This defense method is highly discouraged as it does not guarantee safety due to various limitations.</p>
+
+<h5 id="how-does-escaping-work">How does Escaping work?</h5>
+
+<p>For each special character that might interfere with the query, you replace or escape it with a safe equivalent. Different Databases have different ways of handling escaping.</p>
+
+<h5 id="below-are-few-common-sql-special-characters-and-their-functions">Below are few common SQL special characters and their functions</h5>
+<ul>
+  <li>Single Quote (<code class="language-plaintext highlighter-rouge">'</code>): Used to delimit strings in SQL.</li>
+  <li>Double Quote (<code class="language-plaintext highlighter-rouge">"</code>): Often used for quoting column or table names.</li>
+  <li>Backslash (<code class="language-plaintext highlighter-rouge">\</code>): Used as an escape character in many SQL implementations.</li>
+  <li>Semicolon (<code class="language-plaintext highlighter-rouge">;</code>): Indicates the end of a SQL statement.</li>
+  <li>Comment (<code class="language-plaintext highlighter-rouge">--</code> or <code class="language-plaintext highlighter-rouge">/* ... */</code>): Allows attackers to comment out the remainder of a query.</li>
+</ul>
+
+<h6 id="escaping-single-quotes-">Escaping single quotes (<code class="language-plaintext highlighter-rouge">'</code>):</h6>
+
+<p>Take a look at below query</p>
+<pre><code class="language-Java">String query = 'SELECT * FROM accounts WHERE username = ' + request.getParameter("custName");
+ResultSet rs = stmt.executeQuery(query);
+</code></pre>
+
+<p>If the user supplied input is <code class="language-plaintext highlighter-rouge">O'Rielly</code>, then the query will break and result in error.</p>
+
+<p>To avoid broken queries, the developer must escape the (<code class="language-plaintext highlighter-rouge">'</code>) manually. This can be done using doubling the single quotes (<code class="language-plaintext highlighter-rouge">''</code>).</p>
+
+<h5 id="a-solution-to-escaping-only-single-quotes--in-java">A solution to escaping only single quotes (<code class="language-plaintext highlighter-rouge">'</code>) in Java</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="nc">UserInput</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"custName"</span><span class="o">);</span>
+<span class="c1">//Input = O'Rielly</span>
+<span class="nc">String</span> <span class="nc">EscapedInput</span> <span class="o">=</span> <span class="nc">UserInput</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"'"</span><span class="o">,</span><span class="s">"''"</span><span class="o">);</span>
+<span class="c1">//Now manually construct the query</span>
+<span class="nc">String</span> <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT * FROM accounts WHERE username = '"</span> <span class="o">+</span> <span class="nc">EscapedInput</span> <span class="o">+</span> <span class="s">"'"</span><span class="o">);</span>
+<span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="n">query</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>This example will not return errors, when provided with input <code class="language-plaintext highlighter-rouge">O'Rielly</code>. Similarly for different special characters, different escaping methods are to be used. But such practices are highly discouraged as escaping all the user input is very unsafe. Even though the developers cover all edge cases, there is still a huge risk of SQL injection attacks. Better Alternatives like prepared statements are highly recommended.</p>
+
+<h2 id="additional-defenses">Additional Defenses</h2>
+
+<p>In Addition to implementing any one of the four primary defenses, these additional defenses can also be implemented for maximizing the security of the application. The additional defenses are:</p>
+<ul>
+  <li><strong>Least Privilege</strong></li>
+  <li><strong>Allow-List Input Validation</strong></li>
+</ul>
+
+<h3 id="least-privilege">Least Privilege</h3>
+
+<p>To minimize the damage of a successful SQL injection attack, consider minimizing the privileges assigned to the every database account in your environment i.e The principle of least privilege (PoLP). Use Bottom-Up approach, always start from what access the application accounts require rather than focusing what access you need to take away.</p>
+
+<p>Accounts that require to only read the data should be given only read privileges and follow the same for write, provide only if absolutely necessary. DO NOT grant DBA or ADMIN privileges to any of the application accounts. Even though it is easy to do so and everything just functions normally but it is extremely dangerous.</p>
+
+<h5 id="what-is-an-application-account">What is an Application Account?</h5>
+
+<p>Application Account refers to a database user account that acts as a bridge between the web application and the database. It is not a person or a software It is just the database account that the web application software uses to store or retrieve data from the database. Any Application account should not contain Admin privileges like <code class="language-plaintext highlighter-rouge">DROP</code>,<code class="language-plaintext highlighter-rouge">DELETE</code> or <code class="language-plaintext highlighter-rouge">ALTER</code>.</p>
+
+<h4 id="minimizing-application-and-os-privileges">Minimizing Application and OS privileges</h4>
+
+<h5 id="application-privilege">Application privilege</h5>
+
+<p>In addition to SQL injection Attacks, there exist other threats to your database data, such as attackers manipulating the parameters from a legal value that is authorized for their current account to a value that is unauthorized for them (only meant to be accessible to <code class="language-plaintext highlighter-rouge">root</code> or the the <code class="language-plaintext highlighter-rouge">admin</code>).</p>
+
+<p>For Example
+Consider an application where user-supplied input is appended to query the database directly. Even if the user-input is validated using <code class="language-plaintext highlighter-rouge">javaScript</code>, the attacker could still modify the URL like this:</p>
+<pre><code class="language-URL">https://flipkart.com/product?id=322
+</code></pre>
+<p>To</p>
+<pre><code class="language-URL">https://flipkart.com/product?id=999        //To be accessed only by admin
+</code></pre>
+
+<p>Since the user-input validation is on the client-side, the attacker can easily bypass the authentication. This is why the input-validation should always be done on the server side where attacker has no control. Even if an attacker gains access to a Application account, to minimize the damage, the privileges assigned to the account should be minimal.</p>
+
+<h5 id="os-privilege">OS privilege</h5>
+
+<p>The OS (Operating System) Account under which the DBMS (Database Management System) runs under should never be run as <code class="language-plaintext highlighter-rouge">root</code> or <code class="language-plaintext highlighter-rouge">system</code>. By default most DBMSs run as <code class="language-plaintext highlighter-rouge">system</code> account which is very powerful and dangerous. It is recommended to run the DBMS with an appropriate account with restricted privileges.</p>
+
+<p><strong>To create a new user</strong>:</p>
+
+<p>Login to MySQL as root user</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</code></pre></div></div>
+
+<p>Now create a new user with restricted privileges using the following command</p>
+<pre><code class="language-MySQL">CREATE USER 'user_a'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT ON mydatabase.* TO 'user_a'@'localhost';
+FLUSH PRIVILEGES;
+</code></pre>
+
+<p>This way only the necessary privileges are to be assigned to the user account on the OS that runs the DBMS. To create new user application accounts on the database to be accessed from different devices, the <code class="language-plaintext highlighter-rouge">'localhost'</code> should be simply replaced by (<code class="language-plaintext highlighter-rouge">'%'</code>) meaning that it allows any host with the password to access the database which might be a threat if passwords are weak. So it is recommended to limit the access for IP range using <code class="language-plaintext highlighter-rouge">'192.13.32.%'</code>. This provides remote access and also maintaining security.</p>
+
+<h4 id="additional-measures-when-developing">Additional Measures When Developing</h4>
+
+<p>When assigning privileges, if an application account needs access to only few tables, consider creating a <code class="language-plaintext highlighter-rouge">VIEW</code> that limits only to required data and providing access to only that view instead, rather that the actual table.</p>
+
+<p>If you plan to use stored procedures everywhere, then do not allow application accounts to execute queries directly, rather only allow them to execute stored procedures that they require. Avoid giving them direct access to tables in the database.</p>
+
+<h4 id="least-admin-privileges-for-multiple-database-user-accounts">Least Admin Privileges For Multiple Database User Accounts</h4>
+
+<p>The developers should refrain from using the same <code class="language-plaintext highlighter-rouge">root</code> or <code class="language-plaintext highlighter-rouge">admin</code> account for multiple web applications to connect to the database. Different application accounts are to be used for different web applications.</p>
+
+<p>Each and every web application must have a designated database account with least privileges that it requires to connect to the database. This can help reduce the privileges to the web applications.</p>
+
+<p>For example, consider a ‘Login’, ‘Sign-Up’ and ‘Profile Page’ web applications. Here providing <code class="language-plaintext highlighter-rouge">admin</code> or same account to all three web applications would be a poor decision. The ‘Login’ requires only <code class="language-plaintext highlighter-rouge">SELECT</code> access, whereas ‘Sign-Up’ requires only <code class="language-plaintext highlighter-rouge">INSERT</code> access and the ‘Profile Page’ application requires <code class="language-plaintext highlighter-rouge">SELECT</code> , <code class="language-plaintext highlighter-rouge">INSERT</code> and <code class="language-plaintext highlighter-rouge">UPDATE</code> access. Hence least privilege can be maximized.</p>
+
+<h4 id="enhancing-least-privilege-with-sql-views">Enhancing Least Privilege with SQL Views</h4>
+
+<p>You can use SQL views to enhance the granularity of access by limiting the read access to specific data of a table. For Example, consider storing password in plain-text instead of salty-hash values (due to specific legal requirements) in the table. If an application account is to be given access to the passwords, then a view is to be generated that depicts the hash values of the passwords. The access to the tables in the database is revoked from all the DB users except <code class="language-plaintext highlighter-rouge">admin</code>.</p>
+
+<p>If a successful SQL injection attack occurs, the attacker might have access to only salted-hash values of the passwords and not the plain-text passwords, Since no application user has access to the table itself.</p>
+
+<h4 id="allow-list-input-validation">Allow-List Input Validation</h4>
+
+<p>As mentioned earlier implementing Input Validation as a primary defense only if nothing else works, but implementing it as a secondary defense in highly recommended to improve security. As explained in above section, it is used to detect unauthorized input before appending to the query. Proceed with caution, Input validation is highly discouraged as a primary defense, unless it is the only option.</p>
+
+<p>That’s a wrap. Firstly, congratulations on making it so far. You have done a great job, wishing you Best of luck!</p>
+:ET
