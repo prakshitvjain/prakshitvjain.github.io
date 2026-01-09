@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Prakshit V Jain</title>
   <subtitle>cyber security, cybersecurity, prakshit, github, hacking, blog, writeup, ctf</subtitle>
-  <updated>2026-01-04T23:48:56+05:30</updated>
+  <updated>2026-01-09T14:23:53+05:30</updated>
   <author>
     <name>Prakshit V Jain</name>
     <uri>http://localhost:4000/</uri>
@@ -20,6 +20,30 @@
 
   
   <entry>
+    <title>ScriptCTF 2025 Write-up</title>
+    <link href="http://localhost:4000/posts/scriptCTF-2025/" rel="alternate" type="text/html" title="ScriptCTF 2025 Write-up" />
+    <published>2025-10-02T05:30:00+05:30</published>
+  
+    <updated>2025-10-02T05:30:00+05:30</updated>
+  
+    <id>http://localhost:4000/posts/scriptCTF-2025/</id>
+    <content type="text/html" src="http://localhost:4000/posts/scriptCTF-2025/" />
+    <author>
+      <name>Prakshit V Jain</name>
+    </author>
+
+  
+    
+    <category term="CTF Write-up" />
+    
+  
+
+  <summary>This write-up contains solutions of few challenges from ScriptCTF 2025, where I (solo) bagged 403rd place out of 1767 teams from all over the world. It contained challenges suitable for beginners to seasoned hackers. Do not miss the last challenge, I loved it the most.  Misc Rules  Just read the rules and you will have a link to prizes, the flag is on top right corner scriptCTF{600D_1ucK_5011D3...</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>NahamCon CTF 2025 Write-up</title>
     <link href="http://localhost:4000/posts/nahamcon-ctf-2025/" rel="alternate" type="text/html" title="NahamCon CTF 2025 Write-up" />
     <published>2025-06-01T05:30:00+05:30</published>
@@ -29,10 +53,12 @@
     <id>http://localhost:4000/posts/nahamcon-ctf-2025/</id>
     <content type="text/html" src="http://localhost:4000/posts/nahamcon-ctf-2025/" />
     <author>
-      <name>Prakshit Jain</name>
+      <name>Prakshit V Jain</name>
     </author>
 
   
+    
+    <category term="CTF Write-up" />
     
   
 
@@ -46,15 +72,17 @@
     <link href="http://localhost:4000/posts/owasp-xss/" rel="alternate" type="text/html" title="XSS (Cross Site Scripting)" />
     <published>2025-05-26T05:30:00+05:30</published>
   
-    <updated>2025-05-26T05:30:00+05:30</updated>
+    <updated>2026-01-04T23:49:40+05:30</updated>
   
     <id>http://localhost:4000/posts/owasp-xss/</id>
     <content type="text/html" src="http://localhost:4000/posts/owasp-xss/" />
     <author>
-      <name>Prakshit Jain</name>
+      <name>Prakshit V Jain</name>
     </author>
 
   
+    
+    <category term="Web Security" />
     
   
 
@@ -68,19 +96,45 @@
     <link href="http://localhost:4000/posts/sql-injection/" rel="alternate" type="text/html" title="SQL Injection" />
     <published>2025-03-07T05:30:00+05:30</published>
   
-    <updated>2025-03-07T05:30:00+05:30</updated>
+    <updated>2026-01-04T23:49:40+05:30</updated>
   
     <id>http://localhost:4000/posts/sql-injection/</id>
     <content type="text/html" src="http://localhost:4000/posts/sql-injection/" />
     <author>
-      <name>Prakshit Jain</name>
+      <name>Prakshit V Jain</name>
     </author>
 
   
     
+    <category term="Web Security" />
+    
   
 
   <summary>Note: This blog is completely based on OWASP guide for prevening SQL Injection Attacks, but it is put in my own words so it can be understood in a simpler way.   SQL injection is a process of injecting or inserting a SQL query as a user input from client to application, that may lead to obtaining sensitive data from the database, modify database, shutdown the DBMS and also issue commands to OS....</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>HTTP Server with Fil-C</title>
+    <link href="http://localhost:4000/posts/http-server/" rel="alternate" type="text/html" title="HTTP Server with Fil-C" />
+    <published>2023-06-17T05:30:00+05:30</published>
+  
+    <updated>2023-06-17T05:30:00+05:30</updated>
+  
+    <id>http://localhost:4000/posts/http-server/</id>
+    <content type="text/html" src="http://localhost:4000/posts/http-server/" />
+    <author>
+      <name>Prakshit V Jain</name>
+    </author>
+
+  
+    
+    <category term="Projects" />
+    
+  
+
+  <summary>A simple HTTP server written in C that demonstrates real memory safety using Fil-C. The code contains patterns that would be easily exploitable in normal C, but Fil-C’s runtime protection catches all memory safety violations.  Installation and Execution  Step 1: Install Dependencies  First, ensure your system has the necessary tools to handle the downloads and execution environment.  # the belo...</summary>
 
   </entry>
 
