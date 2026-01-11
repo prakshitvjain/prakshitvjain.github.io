@@ -37,7 +37,16 @@
   },
   
   {
-    "title": "HTTP Server with Fil-C",
+    "title": "SafeX Vault",
+    "url": "/posts/safex-vault/",
+    "categories": "Projects",
+    "tags": "php, LAMP, sql",
+    "date": "2024-10-21 05:30:00 +0530",
+    "content": "A no-nonsense password vault developed using the LAMP stack, with secure coding practices and robust encryption algorithms. salted hashing for authentication and AES encryption for data storage.  SafeX  Installation and Setup  Server and MariaDB (Fedora) Click on this Link to access the documentation  Download the zip          📥 Download safex.zip      Unzip the zip file unzip safex.zip   Setup MariaDB Change the default password values in the DB_setup.sql file mysql -u root -p &lt; DB_setup.sql   Create a .env file in with same variable names from below file  DB_HOST=localhost DB_NAME=safex  DB_USERNAME_LOGIN=safex_login DB_PASSWORD_LOGIN=\"Your Password\"  DB_USERNAME_SIGNUP=safex_signup DB_PASSWORD_SIGNUP=\"Your Password\"  DB_USERNAME_MAIN=safex_main DB_PASSWORD_MAIN=\"Your Password\"  KEY=\"A_Super_Strong_Key\"   Load environment variables into the PHP web app composer init composer require vlucas/phpdotenv   Make the script executable and run chmod +x start_safex.sh ./start_safex.sh   The project will be accessible at the provided link  note: works best on google chrome"
+  },
+  
+  {
+    "title": "Secure HTTP Server",
     "url": "/posts/http-server/",
     "categories": "Projects",
     "tags": "C, project, fil-c, server",

@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Prakshit V Jain</title>
   <subtitle>cyber security, cybersecurity, prakshit, github, hacking, blog, writeup, ctf</subtitle>
-  <updated>2026-01-09T14:23:53+05:30</updated>
+  <updated>2026-01-11T22:43:11+05:30</updated>
   <author>
     <name>Prakshit V Jain</name>
     <uri>http://localhost:4000/</uri>
@@ -48,7 +48,7 @@
     <link href="http://localhost:4000/posts/nahamcon-ctf-2025/" rel="alternate" type="text/html" title="NahamCon CTF 2025 Write-up" />
     <published>2025-06-01T05:30:00+05:30</published>
   
-    <updated>2025-06-01T05:30:00+05:30</updated>
+    <updated>2026-01-09T14:28:36+05:30</updated>
   
     <id>http://localhost:4000/posts/nahamcon-ctf-2025/</id>
     <content type="text/html" src="http://localhost:4000/posts/nahamcon-ctf-2025/" />
@@ -72,7 +72,7 @@
     <link href="http://localhost:4000/posts/owasp-xss/" rel="alternate" type="text/html" title="XSS (Cross Site Scripting)" />
     <published>2025-05-26T05:30:00+05:30</published>
   
-    <updated>2026-01-04T23:49:40+05:30</updated>
+    <updated>2026-01-09T14:28:36+05:30</updated>
   
     <id>http://localhost:4000/posts/owasp-xss/</id>
     <content type="text/html" src="http://localhost:4000/posts/owasp-xss/" />
@@ -96,7 +96,7 @@
     <link href="http://localhost:4000/posts/sql-injection/" rel="alternate" type="text/html" title="SQL Injection" />
     <published>2025-03-07T05:30:00+05:30</published>
   
-    <updated>2026-01-04T23:49:40+05:30</updated>
+    <updated>2026-01-09T14:28:36+05:30</updated>
   
     <id>http://localhost:4000/posts/sql-injection/</id>
     <content type="text/html" src="http://localhost:4000/posts/sql-injection/" />
@@ -116,14 +116,14 @@
 
   
   <entry>
-    <title>HTTP Server with Fil-C</title>
-    <link href="http://localhost:4000/posts/http-server/" rel="alternate" type="text/html" title="HTTP Server with Fil-C" />
-    <published>2023-06-17T05:30:00+05:30</published>
+    <title>SafeX Vault</title>
+    <link href="http://localhost:4000/posts/safex-vault/" rel="alternate" type="text/html" title="SafeX Vault" />
+    <published>2024-10-21T05:30:00+05:30</published>
   
-    <updated>2023-06-17T05:30:00+05:30</updated>
+    <updated>2024-10-21T05:30:00+05:30</updated>
   
-    <id>http://localhost:4000/posts/http-server/</id>
-    <content type="text/html" src="http://localhost:4000/posts/http-server/" />
+    <id>http://localhost:4000/posts/safex-vault/</id>
+    <content type="text/html" src="http://localhost:4000/posts/safex-vault/" />
     <author>
       <name>Prakshit V Jain</name>
     </author>
@@ -134,7 +134,7 @@
     
   
 
-  <summary>A simple HTTP server written in C that demonstrates real memory safety using Fil-C. The code contains patterns that would be easily exploitable in normal C, but Fil-C’s runtime protection catches all memory safety violations.  Installation and Execution  Step 1: Install Dependencies  First, ensure your system has the necessary tools to handle the downloads and execution environment.  # the belo...</summary>
+  <summary>A no-nonsense password vault developed using the LAMP stack, with secure coding practices and robust encryption algorithms. salted hashing for authentication and AES encryption for data storage.  SafeX  Installation and Setup  Server and MariaDB (Fedora) Click on this Link to access the documentation  Download the zip          📥 Download safex.zip      Unzip the zip file unzip safex.zip   Setup...</summary>
 
   </entry>
 
