@@ -17,7 +17,7 @@ typedef struct{
     char version[16];
 }HttpRequest;
 
-void parse_request_line(char *line, HttpRequest *req) {
+void parse_request_line(char *line, HttpRequest *req){
     char *token;
     int part = 0;
     token = strtok(line, " ");
@@ -34,18 +34,19 @@ void parse_request_line(char *line, HttpRequest *req) {
     }
 }
 
+
 char* process_path(char *path) {
-    char *response = malloc(1024);
-    
+    char *response =malloc(1024);
     sprintf(response, 
             "HTTP/1.1 200 OK\r\n"
             "Content-Type: text/html\r\n"
-            "Connection: close\r\n\r\n"
-            "<html><body>"
+            "Connection: close\r\n"
+            "<html>"
+            "<body>"
             "<h1>Memory Safe Server</h1>"
             "<p>You requested: %s</p>"
-            "</body></html>", 
-            path);
+            "</body>"
+            "</html>",path);
     
     return response;
 }
@@ -62,7 +63,7 @@ void handle_client(int client_sock) {
         return;
     }
     
-    buffer[bytes_read] = '\0';
+    buffer[bytes_read] ='\0';
     strncpy(request_data, buffer, sizeof(request_data)-1);
     
     HttpRequest req;
@@ -72,13 +73,12 @@ void handle_client(int client_sock) {
     if(line) {
         parse_request_line(line, &req);
         
-        printf("[REQUEST] %s %s %s\n", req.method, req.path, req.version);
+        printf("[REQUEST] %s%s%s\n", req.method, req.path, req.version);
         
         char *response = process_path(req.path);
-        send(client_sock, response, strlen(response), 0);
+        send(client_sock, response, strlen(response),0);
         free(response);
     }
-    
     close(client_sock);
 }
 
@@ -87,9 +87,9 @@ int main() {
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_len = sizeof(client_addr);
     
-    printf("🔒 Starting Fil-C Protected HTTP Server on port %d\n", PORT);
+    printf("Starting Server on port %d\n",PORT);
     
-    server_sock = socket(AF_INET, SOCK_STREAM, 0);
+    server_sock = socket(AF_INET, SOCK_STREAM,0);
     if(server_sock < 0) {
         perror("socket failed");
         return 1;
@@ -101,8 +101,7 @@ int main() {
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(PORT);
-    
+    server_addr.sin_port = htons(8080);
     if(bind(server_sock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
         perror("bind failed");
         close(server_sock);
@@ -116,18 +115,18 @@ int main() {
     }
     
     printf("Server listening... \n");
-    printf("Visit: http://localhost:%d/\n\n", PORT);
+    printf("Server is accessible at http://localhost:%d/\n\n", PORT);
     
     while(1) {
-        client_sock = accept(server_sock, (struct sockaddr*)&client_addr, &client_len);
+        client_sock = accept(server_sock,(struct sockaddr*)&client_addr,&client_len);
         if(client_sock < 0) {
-            perror("accept failed");
+            perror("Accept failed");
             continue;
         }
-        
         handle_client(client_sock);
     }
     
+
     close(server_sock);
     return 0;
 }
