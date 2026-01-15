@@ -28,8 +28,8 @@ prakshitjain@fedora:~$ whoami
 
 | CTF Name      | Rank    | Participation                   |
 |:-------------:|:-------:|:-------------------------------:|
-| NahamCon 2025 | 669/2949 players | solo |
-| ScriptCTF 2025 | 403/1767 players | solo |
+| NahamCon 2025 | 669/2949 teams | solo |
+| ScriptCTF 2025 | 403/1767 teams | solo |
 | DEADFACE CTF 2025 | 275/849 teams | solo | 
 | 07CTF | 186/444 teams | solo |
 
