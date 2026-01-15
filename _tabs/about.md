@@ -21,47 +21,8 @@ prakshitjain@fedora:~$ whoami
 ```
 <h3 align="center" > Security Enthusiast | CTF Player</h3>
 
-<div align="left">
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png"  width="100%" >
-</div>
+---
 
-## ⚡Technical Strengths
-
-### Specialized Tools
-
-<div align="left">
-
-<img src="https://img.shields.io/badge/Nmap-16907e?style=for-the-badge" >
-<img src="https://img.shields.io/badge/burpsuite-FF6633?style=for-the-badge&logo=burpsuite&logoColor=white" >
-<img src="https://img.shields.io/badge/metasploit-1596CD?style=for-the-badge&logo=metasploit&logoColor=white" >
-<img src="https://img.shields.io/badge/Wireshark-5740A7?style=for-the-badge&logo=Wireshark&logoColor=white" >
-<img src="https://img.shields.io/badge/SQLmap-ffff00?style=for-the-badge" >
-<img src="https://img.shields.io/badge/nessus-5d36c2?style=for-the-badge" >
-<img src="https://img.shields.io/badge/Hydra-165c5b?style=for-the-badge" >
-<img src="https://img.shields.io/badge/crackmapexec-009A00?style=for-the-badge" >
-<img src="https://img.shields.io/badge/Impacket-3b7ab4?style=for-the-badge" >
-<img src="https://img.shields.io/badge/john_the_ripper-741b47?style=for-the-badge" >
-<img src="https://img.shields.io/badge/mimikatz-16537e?style=for-the-badge" >
-<img src="https://img.shields.io/badge/Wazuh-ffff00?style=for-the-badge" >
-<img src="https://img.shields.io/badge/pwntools-16907e?style=for-the-badge" >
-</div>
-
-<div align="left">
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png"  width="100%" >
-</div>
-### Technologies and Programming Languages
-[![My Skills](https://skillicons.dev/icons?i=python,bash,php,c,neovim,git,github,obsidian,mysql,docker,html,css)](https://skillicons.dev)
-
-<div align="left">
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png"  width="100%" >
-</div>
-### Operating systems
-
-[![My Skills](https://skillicons.dev/icons?i=kali,linux,nix,ubuntu,raspberrypi,windows)](https://skillicons.dev)
-
-<div align="left">
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png"  width="100%" >
-</div>
 
 ## 🏆 CTFs
 
@@ -73,9 +34,7 @@ prakshitjain@fedora:~$ whoami
 | 07CTF | 186/444 teams | solo |
 
 
-<div align="left">
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png"  width="100%" >
-</div>
+---
 
 ## 🚩 Badges
 
@@ -86,9 +45,7 @@ prakshitjain@fedora:~$ whoami
 <img width="105" height="105" alt="image" src="https://github.com/user-attachments/assets/fb2c8b6d-0e7f-497e-a097-bed57d073eaa" />
 </div>
 
-<div align="left">
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png"  width="100%" >
-</div>
+---
 
 
 ## 📝 Writeups & Socials
@@ -96,9 +53,8 @@ prakshitjain@fedora:~$ whoami
 - **[Medium Writeups](https://medium.com/@prakshit)**
 - **[LinkedIn](https://linkedin.com/in/prakshitjain)**
 
-<div align="left">
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png"  width="100%" >
-</div>
+---
+
 
 ## 📬 Contact
 - **Email: prakshitvjain@gmail.com**
